@@ -8,10 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no">
     <meta charset="utf-8"> 
-	
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-<script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
-
+    <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
    <title>BaselHack Logo Light Show</title>
 <style>
 svg {
@@ -24,7 +21,7 @@ svg {
   </head>
   
   
-  <body style="background-color:black;" >
+  <body style="background-color:black;" onclick="kaboom()">	
    
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -74,14 +71,21 @@ svg {
 </svg>
 
 	<script language="javascript" type="text/javascript">
-  /*
-	$(document).ready(function() {
-		$("#logoText").animate({
-				    fill       : "rgb(255,255,0)"	
-				} , 2000
-)			
-	});
-*/
+
+var currentColor = "white";
+var colors = ["#FFFF00","#00FFFF"];
+var duration = 2000;
+var delay = 5 * 60 * 1000;  
+function kaboom(){
+	var newColor = colors[Math.floor(Math.random()*colors.length)];
+	colors.push(currentColor);
+	currentColor=newColor;
+	colors.splice(colors.indexOf(newColor), 1);
+	console.log(currentColor);
+	console.log(colors);
+	d3.select("#logoText").transition().duration(duration).style("fill", newColor);
+}
+
    </script>
 
   </body>
